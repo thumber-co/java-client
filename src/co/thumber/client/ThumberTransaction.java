@@ -118,10 +118,10 @@ public abstract class ThumberTransaction {
 	}
 
 	/**
-	 * Sets the NONCE to a value derived from currentTimeMillis().
+	 * Sets the NONCE to a value derived from System.nanoTime().
 	 */
 	public void setNonce() {
-		byte[] digest = md5.digest(Long.toString(System.currentTimeMillis()).getBytes());
+		byte[] digest = md5.digest(Long.toString(System.nanoTime()).getBytes());
 		nonce = new BigInteger(1, digest).toString(16);
 	}
 
