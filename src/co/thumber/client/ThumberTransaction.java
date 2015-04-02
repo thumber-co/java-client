@@ -409,7 +409,6 @@ public abstract class ThumberTransaction {
 	/**
 	 * Annotation which marks all field getters to be included when serializing to JSON.
 	 */
-	@Inherited
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
 	protected @interface JsonGetter {
@@ -422,7 +421,6 @@ public abstract class ThumberTransaction {
 	/**
 	 * Annotation which marks all field setters to be included when deserializing from JSON.
 	 */
-	@Inherited
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
 	protected @interface JsonSetter {
