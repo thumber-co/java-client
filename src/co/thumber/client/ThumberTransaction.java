@@ -356,11 +356,31 @@ public abstract class ThumberTransaction {
 	}
 	
 	/**
+	 * @param inner The inner glue.
+	 * @param outer The outer glue.
+	 * @param map The Map to be joined into a String.
+	 * @return The Map, imploded into String.
+	 */
+	private <K, V> String mapToString(String inner, String outer, Map<K, V> map) {
+		if (map.isEmpty()) return "";
+		
+		StringBuilder ret = new StringBuilder();
+		for (K k : map.keySet()) {
+			ret.append(k);
+			ret.append(inner);
+			ret.append(map.get(k));
+			ret.append(outer);
+		}
+		
+		return ret.substring(0, ret.length() - outer.length());
+	}
+	
+	/**
 	 * Initializes the Maps for JSON getters/setters for the given class.
 	 * 
 	 * @param c The class to init JSON getters and setters from.
 	 */
-	private void initJsonGettersSetters(Class<? extends ThumberTransaction> c) {
+	private static void initJsonGettersSetters(Class<? extends ThumberTransaction> c) {
 		Map<String, Method> classGetters = new HashMap<String, Method>();
 		Map<String, Method> classSetters = new HashMap<String, Method>();
 		
@@ -384,26 +404,6 @@ public abstract class ThumberTransaction {
 		
 		jsonGetters.put(c, classGetters);
 		jsonSetters.put(c, classSetters);
-	}
-	
-	/**
-	 * @param inner The inner glue.
-	 * @param outer The outer glue.
-	 * @param map The Map to be joined into a String.
-	 * @return The Map, imploded into String.
-	 */
-	private <K, V> String mapToString(String inner, String outer, Map<K, V> map) {
-		if (map.isEmpty()) return "";
-		
-		StringBuilder ret = new StringBuilder();
-		for (K k : map.keySet()) {
-			ret.append(k);
-			ret.append(inner);
-			ret.append(map.get(k));
-			ret.append(outer);
-		}
-		
-		return ret.substring(0, ret.length() - outer.length());
 	}
 	
 	/**
